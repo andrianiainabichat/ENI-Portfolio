@@ -1,0 +1,86 @@
+@import url("https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600;700;800;900&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;700&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --g4:#4ade80; --g5:#22c55e; --g6:#16a34a;
+  --r4:#f87171; --r5:#ef4444; --r6:#dc2626;
+  --bg1:#020c06; --bg2:#071a0e; --bg3:#0f2d18;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; cursor:none; }
+body { font-family:"DM Sans",sans-serif; background:var(--bg1); color:#e2e8f0; overflow-x:hidden; }
+
+/* ── Cursor ── */
+.cursor-dot {
+  width:8px; height:8px; background:var(--g4); border-radius:50%;
+  position:fixed; top:0; left:0; pointer-events:none; z-index:9999;
+  transform:translate(-50%,-50%);
+}
+.cursor-ring {
+  width:36px; height:36px; border:1.5px solid rgba(74,222,128,.55); border-radius:50%;
+  position:fixed; top:0; left:0; pointer-events:none; z-index:9998;
+  transform:translate(-50%,-50%); transition:all .12s ease-out;
+}
+.cursor-ring.hovering { width:56px; height:56px; border-color:var(--r5); background:rgba(239,68,68,.06); }
+
+/* ── Glass ── */
+.glass       { background:rgba(255,255,255,.03); backdrop-filter:blur(16px); border:1px solid rgba(255,255,255,.07); }
+.glass-dark  { background:rgba(7,26,14,.8); backdrop-filter:blur(20px); border:1px solid rgba(34,197,94,.15); }
+
+/* ── Gradient text ── */
+.grad-g { background:linear-gradient(135deg,#4ade80,#22c55e,#86efac); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.grad-r { background:linear-gradient(135deg,#fca5a5,#ef4444,#f87171); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; filter:drop-shadow(0 0 10px rgba(239,68,68,.45)); }
+
+/* ── Glow ── */
+.glow-text   { text-shadow:0 0 20px rgba(74,222,128,.7),0 0 40px rgba(74,222,128,.35); }
+.glow-text-r { text-shadow:0 0 20px rgba(239,68,68,.8),0 0 45px rgba(239,68,68,.4); }
+.glow-box    { box-shadow:0 0 24px rgba(34,197,94,.4),0 0 60px rgba(34,197,94,.15); }
+
+/* ── Glow border ── */
+.glow-border          { position:relative; }
+.glow-border::before  { content:""; position:absolute; inset:-1px; border-radius:inherit; padding:1px;
+  background:linear-gradient(135deg,#22c55e,#16a34a,#4ade80);
+  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor; mask-composite:exclude; }
+.glow-border-r::before { background:linear-gradient(135deg,#ef4444,#dc2626,#f87171); }
+
+/* ── Grid bg ── */
+.cyber-grid { background-image:linear-gradient(rgba(34,197,94,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(34,197,94,.04) 1px,transparent 1px); background-size:38px 38px; }
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar        { width:4px; }
+::-webkit-scrollbar-track  { background:var(--bg1); }
+::-webkit-scrollbar-thumb  { background:linear-gradient(#22c55e,#16a34a); border-radius:2px; }
+
+/* ── Loader bar ── */
+.loader-bar { background:linear-gradient(90deg,transparent,#22c55e,#4ade80,transparent); background-size:200% 100%; animation:shimmer 1.5s infinite; }
+@keyframes shimmer { 0%{background-position:-200% 0} 100%{background-position:200% 0} }
+
+/* ── Partner logo cards ── */
+.logo-card {
+  background:white; border-radius:14px; padding:14px 20px;
+  display:flex; align-items:center; justify-content:center;
+  height:80px; flex-shrink:0;
+  transition:all .3s ease;
+  border:1px solid rgba(255,255,255,.1);
+}
+.logo-card:hover { transform:scale(1.06); box-shadow:0 0 20px rgba(34,197,94,.35); }
+.logo-card img   { max-height:52px; max-width:130px; object-fit:contain; }
+
+/* ── Scroll indicator ── */
+@keyframes scrollBounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(8px)} }
+.scroll-bounce { animation:scrollBounce 2s ease-in-out infinite; }
+
+/* ── Particle canvas ── */
+#particle-canvas { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
+
+/* ── Section fade-in ── */
+.fade-in { opacity:0; transform:translateY(40px); transition:opacity .7s ease,transform .7s ease; }
+.fade-in.visible { opacity:1; transform:translateY(0); }
+
+/* ── 3D card hover ── */
+.card-3d { transform-style:preserve-3d; transition:transform .4s ease; }
+.card-3d:hover { transform:perspective(900px) rotateX(-4deg) rotateY(5deg) translateZ(8px); }
